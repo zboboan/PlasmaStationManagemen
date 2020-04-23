@@ -255,6 +255,7 @@ export default {
     msg8:'Warning',
     msg9:'Will any sub-departments be deleted together with the sub-departments?',
     msg10:'Modify the success',
+    msg11:'Add a success',
   },
   button:{
     cancel:'Cancel',

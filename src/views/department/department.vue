@@ -70,7 +70,8 @@
 
 <script type="text/ecmascript-6">
   import {getAllDept,addDept,deleteDept,updateDept} from '@/api/department.js'
-  import { listToThree,deepClone,findIndex,filterOriginalToSuperior} from '@/utils'
+  import { deepClone,findIndex} from '@/utils'
+  import { listToThree,filterOriginalToSuperior} from '@/utils/views'
   import Treeselect from '@riophae/vue-treeselect'
   import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 
@@ -179,10 +180,11 @@
           }else{
             if(element.children){
               let aa = this._filterData(element.children,id);
-              for(let j=0;j<aa.length;j++){
-                newAr.push(aa[j]);
-              }
+              
               if(aa.length>0){
+                for(let j=0;j<aa.length;j++){
+                  newAr.push(aa[j]);
+                }
                 newAr.unshift(element.value);
               }
             }else{
@@ -225,7 +227,7 @@
           this.superior.length = 0;
           getAllDept().then(res=>{
             let {data}=res;
-            console.log(data);
+            // console.log(data);
             let taDa=deepClone(data);
             this.originalData =deepClone(data)
             this.tableData = listToThree(taDa);

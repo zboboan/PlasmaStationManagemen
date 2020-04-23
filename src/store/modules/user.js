@@ -2,7 +2,8 @@ import { login,logout, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter} from '@/router'
 import i18n from '@/lang'
-import {listToTree,merged,listToRole,deepClone} from '@/utils';
+import {deepClone} from '@/utils';
+import {listToTree,merged,listToRole} from '@/utils/views';
 import Layout from '@/layout'
 import ChildDir from '@/layout/childDirectory.vue'
 
@@ -77,23 +78,27 @@ const actions = {
         const { roles, username} = data
 
         if(roles.length>1){
-          let newMen = merged(roles);
+          let newM = deepClone(roles);
+          let newMen = merged(newM);
           commit('SET_ALLMENUS',newMen.newMenus)
+          let roleT = deepClone(newMen.newMenus);
+          let roleT2 = deepClone(newMen.newMenus);
           setTimeout(()=>{
-            roleThree = listToRole(newMen.newMenus)
+            roleThree = listToRole(roleT)
           });
-          menus = listToTree(newMen.newMenus,Layout,ChildDir)
+          menus = listToTree(roleT2,Layout,ChildDir)
           roleName = newMen.role
         }else{
+          let listR = deepClone(roles[0].menus);
+          let listR2 = deepClone(roles[0].menus);
           commit('SET_ALLMENUS', roles[0].menus)
           setTimeout(()=>{
-            roleThree = listToRole(roles[0].menus)
+            roleThree = listToRole(listR)
             resolve({menus,roleName,roleThree})
           });
-          menus = listToTree(roles[0].menus,Layout,ChildDir);
+          menus = listToTree(listR2,Layout,ChildDir);
           roleName = roles[0].roleName.split();
         }
-        
         commit('SET_NAME', username)
         commit('SET_ROLES',roleName) //commit('SET_ROLES', roles)
 

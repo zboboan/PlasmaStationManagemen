@@ -67,7 +67,8 @@
 <script>
 import {constantRoutes,asyncRoutes} from '@/router'
 import path from 'path'
-import { deepClone,filterThree,listToRole,filterParentThree} from '@/utils'
+import { deepClone} from '@/utils'
+import { filterThree,listToRole,filterParentThree} from '@/utils/views'
 import { getRoles, addRole, deleteRole, updateRole } from '@/api/role'
 import i18n from '@/lang'
 import {mapGetters} from 'vuex'
