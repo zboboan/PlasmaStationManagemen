@@ -1,6 +1,6 @@
 <template>
   <div class="position-container">
-    <transition name="positionCont">
+    <transition name="pageSwitch">
       <component :is="currentRole" @jumpOther="jumpOther" />
     </transition>
   </div>
@@ -52,11 +52,5 @@ export default {
   background:red;
 }
 
-.positionCont-enter-active, .positionCont-leave-active {
-  transition: .3s all ease;
-}
-.positionCont-leave-active,.positionCont-enter{
-  transform:translateX(200px);
-  opacity: 0;
-}
+
 </style>

@@ -1,11 +1,10 @@
 <!-- 系统管理/菜单管理 -->
 <template>
   <transition name="menu">
-    <div class="menu">
+    <div class="menu" v-loading="loading">
       <div class="hand_add">
         <el-button type="primary" @click="_handleAddDept">新增部门</el-button>
       </div>
-
       <el-table
         :data="tableData"
         style="width: 100%;margin-bottom: 20px;"
@@ -178,6 +177,7 @@
         },
         superior:[],
         originalData:[],
+        loading:true
       }
     },
     computed:{},
@@ -209,7 +209,7 @@
       },
       _selected(item) {
         //mark:  选中图标
-        this.iconName = item.name      
+        this.iconName = item.name
         this.form.icon = item.val
       },
       _confirmMenu(){
@@ -281,7 +281,9 @@
             this.tableData = listToThree(men);
             let sup = listToThree(men2);
             this.superior = filterOriginalToSuperior(sup,'components')
-            
+            setTimeout(()=>{
+              this.loading = false
+            },800);
           }).catch(err=>{
             console.error(err);
           });

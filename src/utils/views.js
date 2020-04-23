@@ -48,21 +48,44 @@ export function listToThree(...oArr){
     }
   })
   return newArray.filter(ele => ele.pid == 0); 
+}
 
-  // function filterPid(newArray,id=0){
-  //   let fiArr = [];
-  //   newArray.forEach(eleme => {
-  //     let element={...eleme}
-  //     let parentId = element.pid;
-  //     newArray.forEach(el=>{
-  //       let ele = {...el};
-  //       if(ele.id == parentId){
+export function listToThree22(...oArr){
+  let tree = oArr[0] || []; //数据
 
-  //       }
-  //     });
-  //   });
-  // }
-  // return newAr; 
+  let groups = group(tree);
+  let datas = getData(groups[0]);
+
+  function group(...newA){
+    let gro={};
+    newA[0].forEach(element=>{
+      let eleme = {...element};
+      let parentId = eleme.pid;
+      if(gro[parentId]){
+        gro[parentId].push(eleme);
+      }else{
+        gro[parentId]=[];
+        gro[parentId].push(eleme);
+      }
+    });
+    return gro;
+  }
+
+  function getData(info){
+    if (!info) return;
+    var children = [];
+    for (var i = 0; i<info.length; i++) {
+      var item = info[i];
+      let aa = getData(groups[item.id]);
+      if(aa){
+        item.children = []
+        item.children = item['children'].concat(aa);
+      }
+      children.push(item);
+    }
+    return children;
+  }
+  return datas
 }
 
 

@@ -82,3 +82,11 @@ div:focus {
 .app-container {
   padding: 20px;
 }
+
+.pageSwitch-enter-active, .pageSwitch-leave-active {
+  transition: .5s all ease;
+}
+.pageSwitch-leave-active,.pageSwitch-enter{
+  transform:translateX(200px);
+  opacity: 0;
+}
