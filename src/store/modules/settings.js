@@ -4,8 +4,11 @@ import defaultSettings from '@/settings'
 
 const { showSettings, fixedHeader, sidebarLogo } = defaultSettings
 
+console.log(variables);
+variables.theme = 'red'
+
 const state = {
-  theme: variables.theme,
+  theme: "red",
   showSettings: showSettings,
   fixedHeader: fixedHeader,
   sidebarLogo: sidebarLogo

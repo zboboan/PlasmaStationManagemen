@@ -28,7 +28,7 @@ Vue.use(Element, {
 
 Vue.config.productionTip = false
 
-let main_vue = new Vue({
+new Vue({
   el: '#app',
   router,
   store,

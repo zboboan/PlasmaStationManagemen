@@ -229,7 +229,6 @@
       },
       _listEdit(item){
         // mark: 每一条数据 编辑
-
         console.log(item.row);
         this.dialogType = 'edit'
         this.dialogVisible = true
