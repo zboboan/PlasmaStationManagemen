@@ -140,7 +140,6 @@ export default {
   methods: {
     async getRoutes() {
       // 获取所有路由
-
       let rou =this.permission_menus; // 添加所有的路由选项
       // console.log(rou);
       this.serviceRoutes = rou

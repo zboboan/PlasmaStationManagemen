@@ -248,7 +248,6 @@
       },
       _listDelete(item){
         // mark: 每一条数据 删除
-
         let id = item.row.id;
 
         this.$confirm(this.$t('message.msg9'), this.$t('message.msg8'), {
@@ -324,6 +323,7 @@
         try {
           addMenu(data).then(res=>{
             let {data} = res;
+            console.log(data);
             this.originalData.push(data);
             this.tableData = listToThree2(this.originalData);
             this.$message({

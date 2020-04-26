@@ -66,7 +66,7 @@ const actions = {
 
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
-        // console.log(response);
+        console.log(response);
         const { data } = response
         let menus = [];
         let roleThree = [];

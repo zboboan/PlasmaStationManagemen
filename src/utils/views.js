@@ -33,8 +33,7 @@ export function listToRole(oArr){
  */
 
 export function listToThree2(...oArr){
-  let tree = oArr[0] || []; //数据
-
+  let tree = oArr[0] || []; 
   let groups = group(tree);
   let datas = getData(groups[0]);
 
