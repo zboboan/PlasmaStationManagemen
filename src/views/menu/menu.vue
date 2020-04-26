@@ -141,7 +141,7 @@
   import '@riophae/vue-treeselect/dist/vue-treeselect.css'
   import  IconSelect from '@/components/IconSelect/IconSelect'
   import { deepClone,findIndex} from '@/utils'
-  import { filterOriginalToSuperior,listToThree} from '@/utils/views'
+  import { filterOriginalToSuperior,listToThree2} from '@/utils/views'
   import {addMenu,deleteMenu,getMenu} from '@/api/menu'
 
   const defaultDept= {
@@ -260,9 +260,7 @@
           deleteMenu(id).then(res=>{
             let i = findIndex(this.originalData,'id',id);
             this.originalData.splice(i, 1);
-            let d = deepClone(this.originalData);
-            console.log(d);
-            this.tableData = listToThree(d);
+            this.tableData = listToThree2(this.originalData);
             this.$message({
               type: 'success',
               message: this.$t('message.msg7')
@@ -275,11 +273,9 @@
         try {
           getMenu().then(res=>{
             let {data} = res;
-            let men = deepClone(data);
-            let men2 = deepClone(data);
             this.originalData = deepClone(data);
-            this.tableData = listToThree(men);
-            let sup = listToThree(men2);
+            this.tableData = listToThree2(data);
+            let sup = listToThree2(data);
             this.superior = filterOriginalToSuperior(sup,'components')
             setTimeout(()=>{
               this.loading = false
@@ -330,9 +326,7 @@
           addMenu(data).then(res=>{
             let {data} = res;
             this.originalData.push(data);
-            let d = deepClone(this.originalData);
-            console.log(d);
-            this.tableData = listToThree(d);
+            this.tableData = listToThree2(this.originalData);
             this.$message({
               type: 'success',
               message: this.$t('message.msg11')

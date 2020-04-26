@@ -68,7 +68,7 @@
 import {constantRoutes,asyncRoutes} from '@/router'
 import path from 'path'
 import { deepClone} from '@/utils'
-import { filterThree,listToRole,filterParentThree} from '@/utils/views'
+import { filterThree2,listToRole,filterParentThree} from '@/utils/views'
 import { getRoles, addRole, deleteRole, updateRole } from '@/api/role'
 import i18n from '@/lang'
 import {mapGetters} from 'vuex'
@@ -291,7 +291,7 @@ export default {
           const checkedNode2 = this.$refs.tree.getHalfCheckedNodes()
           const addAllMenus = checkedNode.concat(checkedNode2);
           // this.role.routes = this.generateTree(deepClone(this.serviceRoutes), '/', checkedKeys)
-          this.role.menus = filterThree(addAllMenus);
+          this.role.menus = filterThree2(addAllMenus);
           if (isEdit) {
             updateRole(this.role).then(res=>{
               let {data} = res;
@@ -325,11 +325,9 @@ export default {
                 remakr:data.remakr,
                 menus:data.menus,
               }
-
               this.rolesList.push(ro)
               // this.getRoles()
             });
-          
           }
 
           const { remakr,roleName } = this.role

@@ -29,28 +29,10 @@ export function listToRole(oArr){
 /**
  * // mark: 把一条一条的数据转换成树结构
  * @param {Array} oArr
+ * @returns {Array}
  */
 
-export function listToThree(...oArr){
-  let newArray = oArr[0]
-
-  newArray.forEach(element => {
-    let parentId = element.pid;
-    if(parentId != 0){
-      newArray.forEach(ele => {
-        if(ele.id == parentId){
-          if(!ele.children){
-            ele.children = [];
-          }
-          ele.children.push(element);
-        }
-      });
-    }
-  })
-  return newArray.filter(ele => ele.pid == 0); 
-}
-
-export function listToThree22(...oArr){
+export function listToThree2(...oArr){
   let tree = oArr[0] || []; //数据
 
   let groups = group(tree);
@@ -143,9 +125,7 @@ export function listToTree(oldArr,Layout,ChildDir){
       children:oldArr[i].children
     }
     newArray.push(c);
-    
   }
-
 
   newArray.forEach(element => {
     let parentId = element.pid;
@@ -225,7 +205,7 @@ export function  filterThree(checkedNode){
 }
 
 /**
- * // mark:把原始数据转化成上一级选择组件格式   用于选择上一级组件
+ * // mark:把原始数据转化成  <选择上一级组件>格式   用于选择上一级组件
  * @param {Array} oArr
  */
 export function  filterOriginalToSuperior(oArr,lab){

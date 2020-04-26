@@ -71,7 +71,7 @@
 <script type="text/ecmascript-6">
   import {getAllDept,addDept,deleteDept,updateDept} from '@/api/department.js'
   import { deepClone,findIndex} from '@/utils'
-  import { listToThree,filterOriginalToSuperior} from '@/utils/views'
+  import { listToThree2,filterOriginalToSuperior} from '@/utils/views'
   import Treeselect from '@riophae/vue-treeselect'
   import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 
@@ -206,9 +206,8 @@
         }).then(async() => {
           deleteDept(id).then(res=>{
             let i = findIndex(this.originalData,'id',id);
-            this.originalData.splice(i, 1);
-            let d = deepClone(this.originalData);
-            this.tableData = listToThree(d);
+            this.originalData.splice(i,1);
+            this.tableData = listToThree2(this.originalData);
             this.$message({
               type: 'success',
               message: this.$t('message.msg7')
@@ -227,10 +226,8 @@
           this.superior.length = 0;
           getAllDept().then(res=>{
             let {data}=res;
-            // console.log(data);
-            let taDa=deepClone(data);
             this.originalData =deepClone(data)
-            this.tableData = listToThree(taDa);
+            this.tableData = listToThree2(data);
             this.superior = filterOriginalToSuperior(this.tableData,'depName');
           }).catch(err=>{
             console.error(err);
@@ -246,8 +243,7 @@
           addDept(this.dept).then(res=>{
             let {data} = res;
             this.originalData.push(data);
-            let d = deepClone(this.originalData);
-            this.tableData = listToThree(d);
+            this.tableData = listToThree2(this.originalData);
           }).catch(err=>{
             console.error(err);
           });
@@ -262,9 +258,8 @@
             let {data} = res;
             let i = findIndex(this.originalData,'id',data.id);
             this.$set(this.originalData,i,data);
-            let d = deepClone(this.originalData);
             this.$nextTick(()=>{
-              this.tableData = listToThree(d);
+              this.tableData = listToThree2(this.originalData);
             })
             this.$message({
               type: 'success',
