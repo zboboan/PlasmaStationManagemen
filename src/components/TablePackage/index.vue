@@ -14,11 +14,10 @@
               class="sel_item"
               v-model="selectValDef"
               multiple
-              style=""
               @change="_selectChange"
               placeholder="请选择">
               <el-option
-                v-for="item in selectVal"
+                v-for="item in selectHead"
                 :disabled="item.disabled"
                 :key="item.value"
                 :label="item.label"
@@ -32,21 +31,18 @@
       <el-table
         :data="tableData"
         border
+        @sort-change="_sortChange"
         style="width: 100%">
-        <el-table-column
-          prop="date"
-          label="日期"
-          width="180">
-        </el-table-column>
-        <el-table-column
-          prop="name"
-          label="姓名"
-          width="180">
-        </el-table-column>
-        <el-table-column
-          prop="address"
-          label="地址">
-        </el-table-column>
+        <template v-for="item in tableHead">
+          <el-table-column
+            :key="item.value"
+            :prop="item.prop"
+            :label="item.label"
+            :width="item.width"
+            :sortable="item.sortable"
+          >
+          </el-table-column>
+        </template>
       </el-table>
     </div>
     
@@ -63,13 +59,19 @@
           return []
         }
       },
-      valDefault:{   // 表头显示数据
+      selectDefault:{   // 下拉选择  现在显示表头数据
         type:Array,
         default:function (){
           return []
         }
       },
-      selectVal:{  // 表格配置例表  通过 valDefault 确定显示表头
+      selectHead:{  // 表格配置例表  下拉选项的数据
+        type:Array,
+        default:function (){
+          return []
+        }
+      },
+      tableHead:{  // 表头显示渲染
         type:Array,
         default:function (){
           return []
@@ -92,12 +94,16 @@
     },
     methods:{
       _getValDef(){
-        console.log(this.valDefault);
-        for(let i=0;i<this.valDefault.length;i++){
-          this.selectValDef.push(this.valDefault[i]);
+        for(let i=0;i<this.selectDefault.length;i++){
+          this.selectValDef.push(this.selectDefault[i]);
         }
       },
       _selectChange(a){
+        // 选择表头
+        this.$emit('selectTableChange',a);
+      },
+      _sortChange(a){
+        // 排序
         console.log(a);
       }
     }

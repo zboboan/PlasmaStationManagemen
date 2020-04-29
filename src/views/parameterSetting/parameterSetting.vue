@@ -3,7 +3,13 @@
   <transition name="parameterSetting">
     <div class="parameterSetting">
       <h4>业务参数设置</h4>
-      <table-package :tableData="tableData" :selectVal="options" :valDefault="value2">
+      <table-package 
+        :tableData="tableData" 
+        :selectHead="tableHeadData" 
+        :selectDefault="showTableHead"
+        :tableHead="tableHead"
+        @selectTableChange="selectTableChange"
+      >
         aaaa
       </table-package>
     </div>
@@ -11,16 +17,18 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import {findIndex} from '@/utils'
   import TablePackage from '@/components/TablePackage';
   export default {
     name:'parameterSetting',
     data() {
       return {
-        options:[
+        tableHeadData:[
           {
             value: '1',
             label: '日期',
-            prop:'data',
+            sortable:'custom',
+            prop:'date',
             width:'180'
           },
           {
@@ -28,35 +36,42 @@
             label: '姓名',
             prop:'name',
             width:'180',
+            sortable:'custom',
             disabled:true
           },
           {
             value: '3',
             label: '地址',
-            prop:'address'
+            prop:'address',
+            sortable:'custom',
+            width:'280',
           },
           {
             value: '4',
             label: '联系电话',
-            prop:'tel'
+            prop:'tel',
+            width:'180',
           },
           {
             value: '5',
             label: '年龄',
-            prop:'age'
+            prop:'age',
+            width:'80',
+            sortable:'custom',
           },
           {
             value: '6',
             label: '组号',
-            prop:'group'
+            prop:'group',
+            width:'180',
           }
         ],
-        value2:['1','2','3'],
+        showTableHead:['1','2','3'],
         tableData: [{
           date: '2016-05-02',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1518 弄',
-          tel:'',
+          tel:'0987',
           age:12,
           group:1
         }, {
@@ -80,7 +95,8 @@
           tel:'59486783734',
           age:17,
           group:4
-        }]
+        }],
+        tableHead:[]
       }
     },
     computed:{
@@ -90,11 +106,45 @@
       TablePackage
     },
     mounted(){
-
+      this._initTable();
     },
     methods:{
-      _selectChange(a){
-        console.log(a);
+      _initTable(){
+        for(let i=0;i<this.showTableHead.length;i++){
+          for(let j=0;j<this.tableHeadData.length;j++){
+            if(this.showTableHead[i] == this.tableHeadData[j].value){
+              this.tableHead.push(this.tableHeadData[j]);
+            }
+          }
+        }
+      },
+      _filterTableHeader(){
+        // mark: 筛选表头数据
+        let s = this.showTableHead;
+        let t = this.tableHead;
+        let ta = this.tableHeadData;
+        if(s.length > t.length){
+          // 添加
+          for(let i=0;i<s.length;i++){
+            let n = findIndex(t,'value',s[i]);
+            if(n<0){
+              let a = findIndex(ta,'value',s[i]);
+              t.push(ta[a]);
+            }
+          }
+        }else{
+          // 删除
+          for(let w=0;w<t.length;w++){
+            let n = s.findIndex((value)=>value==t[w].value);;
+            if(n<0){
+              t.splice(w,1);
+            }
+          }
+        }
+      },
+      selectTableChange(a){
+        this.showTableHead = a;
+        this._filterTableHeader();
       }
     }
   }

@@ -40,6 +40,6 @@
 <style scoped lang='scss' rel='stylesheet/scss'>
 .user{
 
-}
+} 
 
 </style>

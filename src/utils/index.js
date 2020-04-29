@@ -115,7 +115,7 @@ export function param2Obj(url) {
  */
 
 export function findIndex(obj,key,val){
-  return obj.findIndex((value)=>value[key]==val);;
+  return obj.findIndex((value)=>value[key]==val);
 }
 
 /**
