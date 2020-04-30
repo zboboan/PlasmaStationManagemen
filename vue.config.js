@@ -6,6 +6,8 @@ function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
+console.log(__dirname);
+
 const name = defaultSettings.title || '精英天成单采血浆站标准化业务管理系统' // page title
 
 // If your port is set to 80,

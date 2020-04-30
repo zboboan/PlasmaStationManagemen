@@ -2,7 +2,8 @@
 <template>
   <div class="plasma_those" ref="plasmaContent">
     <div class="those_conte">
-      <el-divider content-position="left"><span class="plasma_title">供血浆者基本信息</span></el-divider>
+      <com-title title="供血浆者基本信息" />
+      <!-- <el-divider content-position="left"><span class="plasma_title">供血浆者基本信息</span></el-divider> -->
       <div class="pict">
         <el-row :gutter="10">
           <el-col :span="8">
@@ -22,60 +23,80 @@
         </el-row>
       </div>
       <div class="info">
-        <el-form ref="form" :model="form" label-width="100px" label-position="left">
-          <el-row :gutter="10">
-            <el-col :span="12">
-              <el-form-item label="供血浆者姓名">
-                <el-input v-model="form.name"></el-input>
-              </el-form-item>
+        <el-row :gutter="10">
+          <el-col :span="12">
+            <el-col :span="10">
+              <span class="title_lable">供血浆者姓名</span>
             </el-col>
-            <el-col :span="12">
-              <el-form-item label="性别">
-                <el-input v-model="form.name"></el-input>
-              </el-form-item>
+            <el-col :span="14">
+              <el-input v-model="form.name" :disabled="true"></el-input>
             </el-col>
-          </el-row>
-          <el-row :gutter="10">
-            <el-col :span="12">
-              <el-form-item label="供血浆者编号">
-                <el-input v-model="form.name"></el-input>
-              </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-col :span="10">
+              <span class="title_lable">性别</span>
             </el-col>
-            <el-col :span="12">
-              <el-form-item label="免疫名称">
-                <el-input v-model="form.name"></el-input>
-              </el-form-item>
+            <el-col :span="14">
+              <el-input v-model="form.name" :disabled="true"></el-input>
             </el-col>
-          </el-row>
-          <el-row :gutter="10">
-            <el-col :span="12">
-              <el-form-item label="登记编号">
-                <el-input v-model="form.name"></el-input>
-              </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :gutter="10">
+          <el-col :span="12">
+            <el-col :span="10">
+              <span class="title_lable">供血浆者编号</span>
             </el-col>
-            <el-col :span="12">
-              <el-form-item label="供血浆者类型">
-                <el-input v-model="form.name"></el-input>
-              </el-form-item>
+            <el-col :span="14">
+              <el-input v-model="form.name" :disabled="true"></el-input>
             </el-col>
-          </el-row>
-          <el-row :gutter="10">
-            <el-col :span="12">
-              <el-form-item label="年龄">
-                <el-input v-model="form.name"></el-input>
-              </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-col :span="10">
+              <span class="title_lable">免疫名称</span>
             </el-col>
-            <el-col :span="12">
-              
+            <el-col :span="14">
+              <el-input v-model="form.name" :disabled="true"></el-input>
             </el-col>
-          </el-row>
-        </el-form>
+          </el-col>
+        </el-row>
+        <el-row :gutter="10">
+          <el-col :span="12">
+            <el-col :span="10">
+              <span class="title_lable">登记编号</span>
+            </el-col>
+            <el-col :span="14">
+              <el-input v-model="form.name" :disabled="true"></el-input>
+            </el-col>
+          </el-col>
+          <el-col :span="12">
+            <el-col :span="10">
+              <span class="title_lable">供血浆者类型</span>
+            </el-col>
+            <el-col :span="14">
+              <el-input v-model="form.name" :disabled="true"></el-input>
+            </el-col>
+          </el-col>
+        </el-row>
+        <el-row :gutter="10">
+          <el-col :span="12">
+            <el-col :span="10">
+              <span class="title_lable">年龄</span>
+            </el-col>
+            <el-col :span="14">
+              <el-input v-model="form.name" :disabled="true"></el-input>
+            </el-col> 
+          </el-col>
+          <el-col :span="12">
+            
+          </el-col>
+        </el-row>
       </div>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import ComTitle from '@/components/ComTitle';
   export default {
     name:'plasma_those',
     props:{
@@ -107,7 +128,7 @@
 
     },
     components:{
-
+      ComTitle
     },
     created(){
       window.addEventListener('resize', this.getHeight);
@@ -173,6 +194,7 @@
           z-index: 1;
           padding:10px;
           cursor:pointer;
+          user-select:none;
           color:#777;
           background:rgba(111,111,111,.3);
         }
@@ -182,6 +204,17 @@
 
     .info{
       margin-top:20px;
+      .title_lable{
+        font-size:14px;
+        line-height: 28px;
+      }
+
+      .el-row {
+        margin-bottom: 5px;
+        &:last-child {
+          margin-bottom: 15px;
+        }
+      }
     }
   }
 

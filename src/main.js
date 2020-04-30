@@ -4,7 +4,9 @@ import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
 import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+// import '@/styles/element-variables.scss'
 import '@/styles/index.scss' // global css
+import '@/assets/scss/color_var.scss' // global css
 
 import App from './App'
 import store from './store'
